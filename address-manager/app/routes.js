@@ -7,6 +7,7 @@ module.exports = app => {
 
   app.get('/addresses', addresses.getAddresses);
 
+  app.get('/seed', addresses.seed);
   app.get('/swagger', (req, res) => {
     res.send(require('../swagger.json'));
   });

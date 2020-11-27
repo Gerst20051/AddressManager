@@ -14,7 +14,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient(
 );
 
 module.exports = {
-  getAddresses: async (search) => {
+  getAddresses: async search => {
     const filters = [
       'contains(line1, :line1)',
       'contains(line2, :line2)',
@@ -40,5 +40,13 @@ module.exports = {
       ...(search ? filter : {}),
     }).promise();
     return result.Items;
+  },
+  putAddress: async address => {
+    const params = {
+      TableName: ADDRESSES_TABLE,
+      Item: address,
+    };
+    const result = await dynamoDb.put(params).promise();
+    return result;
   },
 };
