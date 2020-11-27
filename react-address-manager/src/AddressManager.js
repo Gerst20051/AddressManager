@@ -21,7 +21,7 @@ export default function AddressManager(props) {
         <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
       </Box>
       <Box align="center" pb={2}>
-        <Button variant="contained" disableElevation onClick={() => props.setSwagger(true)}>Swagger API Documentation</Button>
+        <Button variant="contained" disableElevation onClick={() => { document.location.search = 'swagger'; }}>Swagger API Documentation</Button>
       </Box>
     </Fragment>
   );

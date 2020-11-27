@@ -5,7 +5,7 @@ const transformers = require('../transformers');
 module.exports = new function () {
   this.getAddresses = async (req, res) => {
     try {
-      const dbAddresses = await db.getAddresses();
+      const dbAddresses = await db.getAddresses(req.query.search);
       const addresses = await Promise.all(dbAddresses.map(transformers.address));
       res.send(addresses);
     } catch (e) {

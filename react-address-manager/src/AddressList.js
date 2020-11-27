@@ -41,16 +41,29 @@ export default function AddressList(props) {
       <List disablePadding>
         {addresses.map(address => (
           <ListItem divider key={address.id} className={classes.listItem}>
-            <ListItemText primary={address.name} align="center" />
+            <ListItemText primary={[
+              address.line1,
+              address.line2,
+              address.city,
+              `${address.state} ${address.zip}`,
+            ].filter(item => item).join(', ')} align="center" />
           </ListItem>
         ))}
       </List>
     );
-  } else if (error) {
-    return <Box py={2}><Typography>Error Loading Addresses</Typography></Box>;
-  } else if (!isLoaded) {
-    return <Box py={2}><Typography>Loading Addresses...</Typography></Box>;
-  } else {
-    return <Box py={2}><Typography>No Addresses Exist</Typography></Box>;
   }
+
+  return (
+    <Box py={2}>
+      <Typography>
+        {
+          error
+            ? 'Error Loading Addresses'
+            : !isLoaded
+              ? 'Loading Addresses...'
+              : 'No Addresses Exist'
+        }
+      </Typography>
+    </Box>
+  );
 }

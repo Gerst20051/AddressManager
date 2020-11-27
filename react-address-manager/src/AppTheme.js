@@ -1,14 +1,14 @@
-import { blue, pink } from '@material-ui/core/colors';
+import { cyan, orange } from '@material-ui/core/colors';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: blue[500],
+      main: cyan[500],
     },
     secondary: {
-      main: pink[500],
+      main: orange[500],
     },
   },
 });

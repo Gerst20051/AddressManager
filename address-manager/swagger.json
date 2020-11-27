@@ -26,6 +26,14 @@
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "search",
+            "description": "query with a partial address string and receive all matching addresses in the data-set",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "array of addresses",
@@ -43,10 +51,32 @@
   "definitions": {
     "Address": {
       "type": "object",
+      "required": [
+        "id",
+        "line1",
+        "city",
+        "state",
+        "zip"
+      ],
       "properties": {
         "id": {
           "type": "string",
           "format": "uuid"
+        },
+        "line1": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
         }
       }
     }
