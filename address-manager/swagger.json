@@ -1,0 +1,54 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the api documentation for the address manager.",
+    "version": "1.0.0",
+    "title": "Address Manager"
+  },
+  "host": "hnswave.co",
+  "basePath": "/dev",
+  "tags": [
+    {
+      "name": "addresses",
+      "description": "endpoints for addresses"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/addresses": {
+      "get": {
+        "tags": [
+          "addresses"
+        ],
+        "summary": "gets an array of addresses",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "array of addresses",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Address"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Address": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    }
+  }
+}

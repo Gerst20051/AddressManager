@@ -1,0 +1,71 @@
+service: address-manager
+
+frameworkVersion: '2'
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  environment:
+    ADDRESSES_TABLE: ${self:service}-addresses-${opt:stage, self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:BatchGetItem
+        - dynamodb:BatchWriteItem
+        - dynamodb:DeleteItem
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:UpdateItem
+      Resource:
+        - !GetAtt AddressesDynamoDBTable.Arn
+
+custom:
+  dynamodb:
+    seed:
+      test:
+        sources:
+          - table: ${self:provider.environment.ADDRESSES_TABLE}
+            sources: [./seeds/addresses.json]
+    stages:
+      - ${opt:stage, self:provider.stage}
+    start:
+      convertEmptyValues: true
+      migrate: true
+      noStart: true
+      seed: true
+
+functions:
+  app:
+    handler: app/app.handler
+    events:
+      - http:
+          path: /
+          method: ANY
+          cors: true
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
+
+resources:
+  Resources:
+    AddressesDynamoDBTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Delete
+      Properties:
+        TableName: ${self:provider.environment.ADDRESSES_TABLE}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

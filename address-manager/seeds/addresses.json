@@ -1,0 +1,61 @@
+[
+  {
+    "id": "fbfc24b2-b645-4460-b4b7-ff8b69089204",
+    "line1": "Massachusetts Hall",
+    "city": "Cambridge",
+    "state": "MA",
+    "zip": "02138"
+  },
+  {
+    "id": "c77fb18f-0a8a-4f9d-a907-18b73e57cc3d",
+    "line1": "3400 N. Charles St.",
+    "city": "Baltimore",
+    "state": "MD",
+    "zip": "21218"
+  },
+  {
+    "id": "da5ffcfb-57d7-4b94-b279-0881a18c1897",
+    "line1": "Roosevelt Way NE",
+    "city": "Seattle",
+    "state": "WA",
+    "zip": "98115"
+  },
+  {
+    "id": "79279f53-78e7-4ec6-87e4-5f482f607b44",
+    "line1": "1600 Holloway Ave",
+    "city": "San Francisco",
+    "state": "CA",
+    "zip": "94132"
+  },
+  {
+    "id": "dff886de-a11e-4570-b597-7b74a99b3e84",
+    "line1": "1600 Holloway Ave",
+    "line2": "Suite 10",
+    "city": "San Francisco",
+    "state": "CA",
+    "zip": "94132"
+  },
+  {
+    "id": "dfa458a3-9e82-4402-899d-3cf9d5b6d0bc",
+    "line1": "1600 Holloway Ave",
+    "line2": "Suite 20",
+    "city": "San Francisco",
+    "state": "CA",
+    "zip": "94132"
+  },
+  {
+    "id": "a7e8b2ac-7508-42ce-90a2-97ccd1d2b020",
+    "line1": "500 S State St",
+    "city": "Ann Arbor",
+    "state": "MI",
+    "zip": "48109"
+  },
+  {
+    "id": "8c1e1ead-cf53-463b-bf97-2c9d36783ed3",
+    "line1": "185 Berry St",
+    "line2": "Suite 6100",
+    "city": "San Francisco",
+    "state": "CA",
+    "zip": "94107"
+  }
+]
