@@ -4,10 +4,13 @@ import { Fragment, useState } from 'react';
 import AddressList from './AddressList';
 import config from './config';
 import Header from './Header';
+import { useDebounce } from './utils';
 
 export default function AddressManager(props) {
   const [addresses, setAddresses] = useState();
   const [runSeedersDate, setRunSeedersDate] = useState();
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 1E3);
 
   const runSeeders = () => {
     fetch(`${config.API_URL}/seed`)
@@ -23,13 +26,14 @@ export default function AddressManager(props) {
 
   return (
     <Fragment>
-      <Header text="Address Manager" />
+      <Header text="Address Manager" setSearchTerm={setSearchTerm} />
       <Paper variant="outlined" square>
         <Box align="center">
           <AddressList
             addresses={addresses}
             setAddresses={setAddresses}
-            runSeedersDate={runSeedersDate} />
+            runSeedersDate={runSeedersDate}
+            searchTerm={debouncedSearchTerm} />
         </Box>
       </Paper>
       <Box align="center" py={2}>

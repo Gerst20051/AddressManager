@@ -21,7 +21,13 @@ export default function AddressList(props) {
   const { setAddresses: propsSetAddresses } = props;
 
   useEffect(() => {
-    fetch(`${config.API_URL}/addresses`)
+    const params = {};
+    if (props.searchTerm) {
+      params.search = props.searchTerm;
+    }
+    const query = new URLSearchParams(params).toString();
+    const urlParts = [`${config.API_URL}/addresses`, query].filter(part => part);
+    fetch(urlParts.join('?'))
       .then(res => res.json())
       .then(
         result => {
@@ -34,7 +40,7 @@ export default function AddressList(props) {
           setError(error);
         }
       );
-  }, [props.runSeedersDate, propsSetAddresses]);
+  }, [props.runSeedersDate, props.searchTerm, propsSetAddresses]);
 
   if (addresses.length) {
     return (
