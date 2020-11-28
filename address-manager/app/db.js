@@ -14,6 +14,14 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient(
 );
 
 module.exports = {
+  deleteAddressById: async id => {
+    const result = await dynamoDb.delete({
+      TableName: ADDRESSES_TABLE,
+      Key: { id },
+      ReturnValues: 'ALL_OLD',
+    }).promise();
+    return result.Attributes;
+  },
   getAddressById: async id => {
     const result = await dynamoDb.get({
       TableName: ADDRESSES_TABLE,

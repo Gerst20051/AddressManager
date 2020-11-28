@@ -36,13 +36,6 @@ const constraints = {
     },
     type: 'string',
   },
-  country: {
-    length: {
-      maximum: 3,
-      minimum: 2,
-    },
-    type: 'string',
-  },
   zip: {
     length: {
       maximum: 12,
@@ -53,9 +46,42 @@ const constraints = {
     },
     type: 'string',
   },
+  country: {
+    length: {
+      maximum: 3,
+      minimum: 2,
+    },
+    type: 'string',
+  },
 };
 
 module.exports = new function () {
+  this.deleteAddress = async (req, res) => {
+    try {
+      const { addressId } = req.params;
+      const dbAddress = await db.deleteAddressById(addressId);
+      if (!dbAddress) return res.sendStatus(404);
+      const address = await transformers.address(dbAddress);
+      res.send(address);
+    } catch (e) {
+      console.error(e);
+      res.sendStatus(500);
+    }
+  };
+
+  this.getAddress = async (req, res) => {
+    try {
+      const { addressId } = req.params;
+      const dbAddress = await db.getAddressById(addressId);
+      if (!dbAddress) return res.sendStatus(404);
+      const address = await transformers.address(dbAddress);
+      res.send(address);
+    } catch (e) {
+      console.error(e);
+      res.sendStatus(500);
+    }
+  };
+
   this.getAddresses = async (req, res) => {
     try {
       const dbAddresses = await db.getAddresses(req.query.search);
@@ -69,11 +95,15 @@ module.exports = new function () {
 
   this.putAddress = async (req, res) => {
     try {
+      const { addressId } = req.params;
+      if (addressId) {
+        const dbAddressExists = await db.getAddressById(addressId);
+        if (!dbAddressExists) return res.sendStatus(404);
+      }
       const validationErrors = validate(req.body, constraints, { format: 'flat' });
       if (validationErrors) {
         return res.status(400).send(validationErrors);
       }
-      const { addressId } = req.params;
       if (addressId) {
         req.body.id = addressId;
       }
@@ -102,6 +132,9 @@ module.exports = new function () {
 
   this.updateAddress = async (req, res) => {
     try {
+      const { addressId } = req.params;
+      const dbAddressExists = await db.getAddressById(addressId);
+      if (!dbAddressExists) return res.sendStatus(404);
       const validationConstraints = Object.keys(req.body).reduce(
         (bodyConstraints, key) => Object.assign(bodyConstraints, { [key]: constraints[key] }), {}
       );
@@ -109,7 +142,6 @@ module.exports = new function () {
       if (validationErrors) {
         return res.status(400).send(validationErrors);
       }
-      const { addressId } = req.params;
       const rawAddress = models.createAddress({
         ...req.body,
         id: addressId,

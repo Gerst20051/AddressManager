@@ -45,6 +45,302 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "addresses"
+        ],
+        "summary": "creates a new address",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "line1",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1600 Holloway Ave"
+          },
+          {
+            "in": "body",
+            "name": "line2",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Suite 20"
+          },
+          {
+            "in": "body",
+            "name": "city",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "San Francisco"
+          },
+          {
+            "in": "body",
+            "name": "state",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "CA"
+          },
+          {
+            "in": "body",
+            "name": "zip",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "94132"
+          },
+          {
+            "in": "body",
+            "name": "country",
+            "schema": {
+              "type": "string"
+            },
+            "example": "US"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "newly created address",
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
+          }
+        }
+      }
+    },
+    "/addresses/{addressId}": {
+      "get": {
+        "tags": [
+          "addresses"
+        ],
+        "summary": "gets an address",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "addressId",
+            "description": "uuid of address to return",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "address",
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "addresses"
+        ],
+        "summary": "updates the specified address",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "addressId",
+            "description": "uuid of address to update",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "line1",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1600 Holloway Ave"
+          },
+          {
+            "in": "body",
+            "name": "line2",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Suite 20"
+          },
+          {
+            "in": "body",
+            "name": "city",
+            "schema": {
+              "type": "string"
+            },
+            "example": "San Francisco"
+          },
+          {
+            "in": "body",
+            "name": "state",
+            "schema": {
+              "type": "string"
+            },
+            "example": "CA"
+          },
+          {
+            "in": "body",
+            "name": "zip",
+            "schema": {
+              "type": "string"
+            },
+            "example": "94132"
+          },
+          {
+            "in": "body",
+            "name": "country",
+            "schema": {
+              "type": "string"
+            },
+            "example": "US"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "updated address",
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "addresses"
+        ],
+        "summary": "replaces the specified address",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "addressId",
+            "description": "uuid of address to replace",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "line1",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1600 Holloway Ave"
+          },
+          {
+            "in": "body",
+            "name": "line2",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Suite 20"
+          },
+          {
+            "in": "body",
+            "name": "city",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "San Francisco"
+          },
+          {
+            "in": "body",
+            "name": "state",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "CA"
+          },
+          {
+            "in": "body",
+            "name": "zip",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "94132"
+          },
+          {
+            "in": "body",
+            "name": "country",
+            "schema": {
+              "type": "string"
+            },
+            "example": "US"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "replaced address",
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "addresses"
+        ],
+        "summary": "deletes the specified address",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "addressId",
+            "description": "uuid of address to delete",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "deleted address",
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
       }
     }
   },
@@ -73,10 +369,18 @@
           "type": "string"
         },
         "state": {
-          "type": "string"
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 3
         },
         "zip": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 12
+        },
+        "country": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 3
         }
       }
     }
