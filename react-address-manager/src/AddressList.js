@@ -46,6 +46,7 @@ export default function AddressList(props) {
               address.line2,
               address.city,
               `${address.state} ${address.zip}`,
+              address.country,
             ].filter(item => item).join(', ')} align="center" />
           </ListItem>
         ))}

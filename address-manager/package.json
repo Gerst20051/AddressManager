@@ -6,7 +6,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "serverless-http": "^2.6.0",
-    "uuid": "^8.3.1"
+    "uuid": "^8.3.1",
+    "validate.js": "^0.13.1"
   },
   "scripts": {
     "deploy": "serverless deploy",
@@ -49,7 +50,12 @@
         }
       ],
       "no-console": "off",
-      "require-sort/require-sort": "error",
+      "require-sort/require-sort": [
+        "error",
+        {
+          "ignoreDeclarationSort": true
+        }
+      ],
       "wrap-iife": [
         "error",
         "any"

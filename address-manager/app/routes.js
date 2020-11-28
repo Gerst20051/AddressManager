@@ -6,6 +6,9 @@ module.exports = app => {
   });
 
   app.get('/addresses', addresses.getAddresses);
+  app.patch('/addresses/:addressId', addresses.updateAddress);
+  app.post('/addresses', addresses.putAddress);
+  app.put('/addresses/:addressId', addresses.putAddress);
 
   app.get('/seed', addresses.seed);
   app.get('/swagger', (req, res) => {

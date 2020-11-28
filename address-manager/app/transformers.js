@@ -6,5 +6,6 @@ module.exports = new function () {
     city: address.city,
     state: address.state,
     zip: address.zip,
+    country: address.country,
   });
-};
+}();
