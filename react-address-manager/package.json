@@ -47,6 +47,15 @@
           "functions": "never"
         }
       ],
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "warn",
+            "error"
+          ]
+        }
+      ],
       "no-else-return": "off",
       "no-nested-ternary": "off",
       "no-shadow": "off",

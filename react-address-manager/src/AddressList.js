@@ -34,7 +34,7 @@ export default function AddressList(props) {
           setError(error);
         }
       );
-  }, [propsSetAddresses]);
+  }, [props.runSeedersDate, propsSetAddresses]);
 
   if (addresses.length) {
     return (

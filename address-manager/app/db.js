@@ -10,7 +10,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient(
       region: 'localhost',
       endpoint: 'http://localhost:8000',
     }
-    : undefined,
+    : undefined
 );
 
 module.exports = {

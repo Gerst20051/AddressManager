@@ -103,7 +103,7 @@ module.exports = new function () {
   this.updateAddress = async (req, res) => {
     try {
       const validationConstraints = Object.keys(req.body).reduce(
-        (bodyConstraints, key) => Object.assign(bodyConstraints, { [key]: constraints[key] }), {},
+        (bodyConstraints, key) => Object.assign(bodyConstraints, { [key]: constraints[key] }), {}
       );
       const validationErrors = validate(req.body, validationConstraints, { format: 'flat' });
       if (validationErrors) {
