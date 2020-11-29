@@ -46,7 +46,9 @@ export default function AddressList(props) {
     return (
       <List disablePadding>
         {addresses.map(address => (
-          <ListItem divider key={address.id} className={classes.listItem}>
+          <ListItem divider key={address.id} className={classes.listItem} onClick={() => {
+            props.setAddress(address);
+          }}>
             <ListItemText primary={[
               address.line1,
               address.line2,

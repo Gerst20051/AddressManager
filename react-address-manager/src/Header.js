@@ -1,5 +1,6 @@
-import { AppBar, InputBase, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, IconButton, InputBase, Toolbar, Typography } from '@material-ui/core';
 import { fade, makeStyles } from '@material-ui/core/styles';
+import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles(theme => ({
@@ -17,6 +18,9 @@ const useStyles = makeStyles(theme => ({
         width: '20ch',
       },
     },
+  },
+  rightHeaderButton: {
+    marginLeft: theme.spacing(1),
   },
   root: {
     flexGrow: 1,
@@ -73,6 +77,11 @@ export default function Header(props) {
               onChange={event => props.setSearchTerm(event.target.value)}
             />
           </div>
+          <IconButton className={classes.rightHeaderButton} edge="end" color="inherit" onClick={() => {
+            props.setOpenAddressDialog(true);
+          }}>
+            <AddIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </div>

@@ -15,6 +15,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient(
 
 module.exports = {
   deleteAddressById: async id => {
+    // TODO: set record.deleted_date rather than deleting the record
     const result = await dynamoDb.delete({
       TableName: ADDRESSES_TABLE,
       Key: { id },
@@ -30,6 +31,8 @@ module.exports = {
     return result.Item;
   },
   getAddresses: async search => {
+    // NOTE: dynamodb is case-sensitive
+    // TODO: add a lowercase column to do case-insensitive filtering
     const filters = [
       'contains(line1, :line1)',
       'contains(line2, :line2)',
