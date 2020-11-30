@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function AddressManager(props) {
   const [address, setAddress] = useState();
-  const [addresses, setAddresses] = useState();
+  const [addresses, setAddresses] = useState([]);
   const [addressForm, setAddressForm] = useState({});
   const [addressFormErrors, setAddressFormErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -66,7 +66,7 @@ export default function AddressManager(props) {
         }
         handleAddressClose();
         setIsLoading(false);
-        // TODO: update addresses data
+        setRunSeedersDate(new Date());
       }))
       .catch(error => {
         setIsLoading(false);
@@ -94,7 +94,7 @@ export default function AddressManager(props) {
         }
         handleAddressClose();
         setIsLoading(false);
-        // TODO: update addresses data
+        setRunSeedersDate(new Date());
       }))
       .catch(error => {
         setIsLoading(false);
@@ -153,7 +153,7 @@ export default function AddressManager(props) {
               .then(
                 result => {
                   setIsLoading(false);
-                  // TODO: update addresses data
+                  setRunSeedersDate(new Date());
                 },
                 error => {
                   setIsLoading(false);
@@ -166,10 +166,10 @@ export default function AddressManager(props) {
         </List>
       </Dialog>
       <Dialog open={openAddressDialog} onClose={handleAddressClose}>
-        <DialogTitle>{ address ? 'Edit' : 'Add' } Address</DialogTitle>
+        <DialogTitle>{address ? 'Edit' : 'Add'} Address</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            { address ? 'Edit' : 'Add' } Address
+            {address ? 'Edit' : 'Add'} Address
           </DialogContentText>
           <TextField
             defaultValue={address && address.line1}
@@ -211,14 +211,11 @@ export default function AddressManager(props) {
             margin="dense"
             onChange={handleAddressChange}
           />
-          { addressFormErrors.length
-            ? (
-              <FormHelperText error margin="dense">
-                {addressFormErrors[0]}
-              </FormHelperText>
-            )
-            : ''
-          }
+          {addressFormErrors.length > 0 && (
+            <FormHelperText error margin="dense">
+              {addressFormErrors[0]}
+            </FormHelperText>
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleAddressClose} color="primary">

@@ -14,16 +14,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function AddressList(props) {
+  const { runSeedersDate, searchTerm, setAddresses } = props;
   const classes = useStyles();
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [addresses, setAddresses] = useState(props.addresses || []);
-  const { setAddresses: propsSetAddresses } = props;
 
   useEffect(() => {
     const params = {};
-    if (props.searchTerm) {
-      params.search = props.searchTerm;
+    if (searchTerm) {
+      params.search = searchTerm;
     }
     const query = new URLSearchParams(params).toString();
     const urlParts = [`${config.API_URL}/addresses`, query].filter(part => part);
@@ -33,19 +32,18 @@ export default function AddressList(props) {
         result => {
           setIsLoaded(true);
           setAddresses(result);
-          propsSetAddresses(result);
         },
         error => {
           setIsLoaded(true);
           setError(error);
         }
       );
-  }, [props.runSeedersDate, props.searchTerm, propsSetAddresses]);
+  }, [runSeedersDate, searchTerm, setAddresses]);
 
-  if (addresses.length) {
+  if (props.addresses.length) {
     return (
       <List disablePadding>
-        {addresses.map(address => (
+        {props.addresses.map(address => (
           <ListItem divider key={address.id} className={classes.listItem} onClick={() => {
             props.setAddress(address);
           }}>
